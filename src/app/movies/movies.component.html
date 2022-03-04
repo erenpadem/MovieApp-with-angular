@@ -1,5 +1,4 @@
 
-
 <div class="card">
     <div class="card-header">
         {{title}}
@@ -7,8 +6,28 @@
     <ul class="list-group list-group-flush">
         <li *ngFor="let movie of movies" routerLink="/detail/{{movie.id}}" class="list-group-item d-flex justify-content-between" >
             <span class="badge bg-primary rounded-pill mx-2" [class.bg-danger]="movie==selectedMovie"> {{movie.id}} </span>{{movie.name}}
-           <span class="close ">&times;</span>
+           <span (click)="deletee(movie)" class="close ">&times;</span>
         </li>
     </ul>
 </div>
 
+<div class="card">
+    <div class="card-header">
+        Add Movie
+    </div>
+    <div class="card-body">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input #name placeholder="Movie name"  class="form-control">
+         </div>
+         <div class="form-group">
+            <label for="imageURL">ImageURL</label>
+            <input #imageUrl placeholder="Movie image"  class="form-control">
+         </div>
+         <div class="form-group">
+            <label for="description">Description</label>
+            <textarea #description placeholder="Movie description"  class="form-control"></textarea>
+         </div>
+        <button (click)="add(name.value,imageUrl.value,description.value); name.value='';imageUrl.value='';description.value='';" class="btn btn-primary btn-sm mt-2">Add</button>
+    </div>
+</div>
