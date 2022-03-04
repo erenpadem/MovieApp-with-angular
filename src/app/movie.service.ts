@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from "rxjs";
 import { LoggingService } from './logging.service';
@@ -24,5 +24,10 @@ export class MovieService {
       this.loggingService.add('MovieService:get detail by id='+id);
       return this.http.get<Movie>(this.apiMoviesUrl+'/'+id);
     }
-
+    update(movie : Movie): Observable<Movie | any> {
+      const httpOptions= {
+        headers:new HttpHeaders({'Content-Type': 'application/json'})
+      }
+       return this.http.put(this.apiMoviesUrl, movie, httpOptions);
+    }
 }
